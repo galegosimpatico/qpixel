@@ -131,6 +131,15 @@ class QuestionsController < ApplicationController
     else
       flash[:danger] = "Can't delete this question right now. Try again later."
     end
+
+    if @question.answer_count > 0
+      @question.answers.each{ |x|
+        x.update(deleted: true, deleted_at: DateTime.now, deleted_by: ???__WHO__???, last_activity: DateTime.now,
+                 last_activity_by: ???__WHO__???)
+        ???PostHistory.post_deleted(x, ???__WHO__???)???
+      } end
+    end
+
     redirect_to url_for(controller: :questions, action: :show, id: @question.id)
   end
 
@@ -151,6 +160,9 @@ class QuestionsController < ApplicationController
     else
       flash[:danger] = "Can't undelete this question right now. Try again later."
     end
+
+    ???UNDELETE ANSWERS???
+
     redirect_to url_for(controller: :questions, action: :show, id: @question.id)
   end
 
