@@ -64,8 +64,18 @@
                     <div class="diff-old is-changed raw-markdown"><%= raw(sanitize(diff.left, scrubber: scrubber)) %></div>
                     <div class="diff-new is-changed raw-markdown"><%= raw(sanitize(diff.right, scrubber: scrubber)) %></div>
                     <% else %>
+                    <%byebug%>
+                    <% if @edit.body_markdown_before == nil %>
+                    <!-- TODO remove this! show only the 'after' column! -->
                     <div class="diff-old is-changed raw-markdown"><%= post.body_markdown %></div>
+
+                    <!-- this is the 'after' column, the only available -->
                     <div class="diff-new is-changed raw-markdown"><%= @edit.body_markdown %></div>
+                    <% else %>
+                      <% diff = Diffy::SplitDiff.new(@edit.body_markdown_before, @edit.body_markdown, format: :html) %>
+                      <div class="diff-old is-changed raw-markdown"><%= raw(sanitize(diff.left, scrubber: scrubber)) %></div>
+                      <div class="diff-new is-changed raw-markdown"><%= raw(sanitize(diff.right, scrubber: scrubber)) %></div>
+                    <% end %>
                     <% end %>
                 <% end %>
             </div>
