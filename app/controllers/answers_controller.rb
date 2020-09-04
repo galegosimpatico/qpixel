@@ -55,6 +55,7 @@ class AnswersController < ApplicationController
       community: @answer.community,
       body: helpers.render_markdown(params[:answer][:body_markdown]),
       body_markdown: params[:answer][:body_markdown] != @answer.body_markdown ? params[:answer][:body_markdown] : nil,
+      body_markdown_before: @answer.body_markdown,
       comment: params[:edit_comment],
       active: true, accepted: false,
       decided_at: nil, decided_by: nil,
