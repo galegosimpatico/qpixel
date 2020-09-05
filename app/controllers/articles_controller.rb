@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
     body_markdown = if params[:article][:body_markdown] != @article.body_markdown
                       params[:article][:body_markdown]
                     end
-
+    byebug
     updates = {
       post: @article,
       user: current_user,
@@ -53,6 +53,7 @@ class ArticlesController < ApplicationController
       title: params[:article][:title] != @article.title ? params[:article][:title] : nil,
       tags_cache: new_tags_cache != @article.tags_cache ? new_tags_cache : @article.tags_cache,
       body_markdown: body_markdown,
+      body_markdown_before: @article.body_markdown,
       comment: params[:edit_comment],
       active: true, accepted: false,
       decided_at: nil, decided_by: nil,

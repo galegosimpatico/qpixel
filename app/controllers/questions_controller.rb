@@ -88,7 +88,7 @@ class QuestionsController < ApplicationController
     body_markdown = if params[:question][:body_markdown] != @question.body_markdown
                       params[:question][:body_markdown]
                     end
-
+    byebug
     updates = {
       post: @question,
       user: current_user,
@@ -97,6 +97,7 @@ class QuestionsController < ApplicationController
       title: params[:question][:title] != @question.title ? params[:question][:title] : nil,
       tags_cache: new_tags_cache != @question.tags_cache ? new_tags_cache : @question.tags_cache,
       body_markdown: body_markdown,
+      body_markdown_before: @question.body_markdown,
       comment: params[:edit_comment],
       active: true, accepted: false,
       decided_at: nil, decided_by: nil,
