@@ -48,8 +48,13 @@
                         <h1 class="h-m-0"><%= post.title %></h1>
                     </div>
                 <% else %>
-                    <div class="diff-old is-changed raw-markdown"><h1><%= post.title %></h1></div>
-                    <div class="diff-new is-changed raw-markdown"><h1><%= @edit.title %></h1></div>
+                    <% if @edit.active %>
+                        <div class="diff-old is-changed raw-markdown"><h1><%= post.title %></h1></div>
+                        <div class="diff-new is-changed raw-markdown"><h1><%= @edit.title %></h1></div>
+                    <% else %>
+                        <div class="diff-old is-changed raw-markdown"><h1><%= @edit.title_before %></h1></div>
+                        <div class="diff-new is-changed raw-markdown"><h1><%= @edit.title %></h1></div>
+                    <% end %>
                 <% end %>
             </div>
         <% end %>
