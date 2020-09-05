@@ -52,8 +52,15 @@
                         <div class="diff-old is-changed raw-markdown"><h1><%= post.title %></h1></div>
                         <div class="diff-new is-changed raw-markdown"><h1><%= @edit.title %></h1></div>
                     <% else %>
+                      <% if @edit.title_before == nil %>
+                        <!-- remove this! show only the 'after' column -->
+                        <div class="diff-old is-changed raw-markdown"><h1><%= post.title %></h1></div>
+                        <!-- this is the 'after' column, the only available - 'before' was not saved! -->
+                        <div class="diff-new is-changed raw-markdown"><h1><%= @edit.title %></h1></div>
+                      <% else %>
                         <div class="diff-old is-changed raw-markdown"><h1><%= @edit.title_before %></h1></div>
                         <div class="diff-new is-changed raw-markdown"><h1><%= @edit.title %></h1></div>
+                      <% end %>
                     <% end %>
                 <% end %>
             </div>
@@ -74,7 +81,7 @@
                     <!-- TODO remove this! show only the 'after' column! -->
                     <div class="diff-old is-changed raw-markdown"><%= post.body_markdown %></div>
 
-                    <!-- this is the 'after' column, the only available -->
+                    <!-- this is the 'after' column, the only available - 'before' was not saved! -->
                     <div class="diff-new is-changed raw-markdown"><%= @edit.body_markdown %></div>
                     <% else %>
                       <% diff = Diffy::SplitDiff.new(@edit.body_markdown_before, @edit.body_markdown, format: :html) %>
