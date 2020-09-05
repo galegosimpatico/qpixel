@@ -97,6 +97,7 @@ class QuestionsController < ApplicationController
       title: params[:question][:title] != @question.title ? params[:question][:title] : nil,
       title_before: @question.title,
       tags_cache: new_tags_cache != @question.tags_cache ? new_tags_cache : @question.tags_cache,
+      tags_cache_before: @question.tags_cache,
       body_markdown: body_markdown,
       body_markdown_before: @question.body_markdown,
       comment: params[:edit_comment],

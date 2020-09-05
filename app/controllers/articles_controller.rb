@@ -51,7 +51,9 @@ class ArticlesController < ApplicationController
       community: @article.community,
       body: body_rendered,
       title: params[:article][:title] != @article.title ? params[:article][:title] : nil,
+      title_before: title, # XXX @article.title ??????
       tags_cache: new_tags_cache != @article.tags_cache ? new_tags_cache : @article.tags_cache,
+      tags_cache_before: @article.tags_cache,
       body_markdown: body_markdown,
       body_markdown_before: @article.body_markdown,
       comment: params[:edit_comment],

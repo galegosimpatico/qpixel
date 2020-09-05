@@ -92,7 +92,7 @@
                 <% end %>
             </div>
 
-        <% if is_question_or_article && @edit.tags_cache != post.tags_cache %>
+        <% if is_question_or_article && (!@edit.active || @edit.tags_cache != post.tags_cache) %>
             <!-- Tags -->
             <% tag_set = post.tag_set %>
             <% required_ids = post.category&.required_tag_ids %>
